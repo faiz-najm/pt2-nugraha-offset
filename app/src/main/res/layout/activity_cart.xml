@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_weight="1"
-            android:text="(without taxes)"
+            android:text="(tanpa PPN)"
             android:textColor="@color/black"
             android:textSize="14sp"
             android:textStyle="italic" />
@@ -72,8 +72,8 @@
         android:id="@+id/continueBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/orange"
-        android:text="Continue"
+        android:background="@color/blue"
+        android:text="@string/continue_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

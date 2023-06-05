@@ -1,7 +1,8 @@
 package com.example.aexpress.utils;
 
 public class Constants {
-    public static String API_BASE_URL = "https://tutorials.mianasad.com/ecommerce";
+     public static String API_BASE_URL = "https://adminpt2.000webhostapp.com";
+//    public static String API_BASE_URL = "http://adminng.000.pe/sample_ecom";
     public static String GET_CATEGORIES_URL = API_BASE_URL + "/services/listCategory";
     public static String GET_PRODUCTS_URL = API_BASE_URL + "/services/listProduct";
     public static String GET_OFFERS_URL = API_BASE_URL + "/services/listFeaturedNews";

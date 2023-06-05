@@ -13,9 +13,12 @@
         android:theme="@style/Theme.AExpress"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".AuthActivity"
+            android:exported="true" />
+        <activity
             android:name=".activities.SearchActivity"
             android:exported="false"
-            android:theme="@style/Theme.AExpress.Actionbar"/>
+            android:theme="@style/Theme.AExpress.Actionbar" />
         <activity
             android:name=".activities.CategoryActivity"
             android:exported="false"
@@ -42,11 +45,13 @@
         <activity
             android:name=".activities.MainActivity"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
 
         <meta-data
