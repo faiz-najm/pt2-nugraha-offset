@@ -1,3 +1,32 @@
 <resources>
-    <string name="app_name">aExpress</string>
+    <string name="app_name">Nugraha Offset</string>
+    <!--Pencarian-->
+    <string name="search_bar">Lagi butuh apa?</string>
+    <string name="search_hint">Cari produk favoritmu di sini</string>
+    <!--Tombol-->
+    <string name="save_button">Simpan</string>
+    <string name="add_button">TAMBAHKAN KE KERANJANG</string>
+    <string name="checkout_button">PROSES PEMBAYARAN</string>
+    <string name="continue_button">LANJUTKAN</string>
+    <!--checkout-->
+    <string name="information_text">Informasi</string>
+    <string name="full_name">Nama Lengkap</string>
+    <string name="email_address">Email</string>
+    <string name="no_hp">No. Handphone</string>
+    <string name="address_hint">Alamat</string>
+    <string name="comments_hint">Komentar Tambahan</string>
+    <string name="date_shipping_hint">Tanggal Pengiriman</string>
+    <string name="cost_details">Rincian Pembayaran</string>
+    <string name="PPN_text">PPN</string>
+    <string name="password">Konfirmasi Password</string>
+    <string name="welcome">WELCOME</string>
+    <string name="login">Login</string>
+    <string name="email_string">Email</string>
+    <string name="password_string">Masukan Password</string>
+    <string name="forgot_password_string">Lupa Sandi?</string>
+    <string name="daftar">Daftar</string>
+    <string name="nama_string">Nama Lengkap</string>
+    <string name="nohp_string">No HP</string>
+    <string name="belum_punya_akun">Belum Punya Akun? Daftar</string>
+    <string name="sudah_punya_akun">Sudah Punya Akun? Masuk</string>
 </resources>

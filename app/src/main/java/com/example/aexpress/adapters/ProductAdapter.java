@@ -15,8 +15,9 @@ import com.example.aexpress.activities.ProductDetailActivity;
 import com.example.aexpress.databinding.ItemProductBinding;
 import com.example.aexpress.model.Product;
 
-import java.lang.reflect.Array;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
 
@@ -41,7 +42,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                 .load(product.getImage())
                 .into(holder.binding.image);
         holder.binding.label.setText(product.getName());
-        holder.binding.price.setText("PKR " + product.getPrice());
+        holder.binding.price.setText(toCurrencyFormat(product.getPrice()));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,4 +71,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             binding = ItemProductBinding.bind(itemView);
         }
     }
+    // make java version of the above function
+    public String toCurrencyFormat(Double price) {
+        Locale localeID = new Locale("in", "ID");
+        double doubleValue = price;
+        NumberFormat numberFormat = NumberFormat.getCurrencyInstance(localeID);
+        numberFormat.setMinimumFractionDigits(0);
+        return numberFormat.format(doubleValue);
+    }
+
 }

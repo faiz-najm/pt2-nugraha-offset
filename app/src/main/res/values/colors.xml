@@ -11,4 +11,11 @@
     <color name="backgroundColor">#E8E8E8</color>
 
     <color name="orange">#FF5722</color>
+    <color name="blue">#449BFE</color>
+
+    <!--Gradient Colors-->
+    <color name="gradientStartColor">#FF5722</color>
+    <color name="gradientEndColor">#FF9800</color>
+
+
 </resources>

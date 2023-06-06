@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?><!-- _rectangle_83 from your XD file. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <corners android:radius="21.98dp" />
+    <solid android:color="#ffffff" />
+    <gradient
+        android:angle="270"
+        android:endColor="#fffafafa"
+        android:startColor="#fffefefd"
+        android:type="linear" />
+
+<!--    Shadow-->
+    <stroke
+        android:width="1dp"
+        android:color="#1a000000" />
+    <padding
+        android:bottom="1dp"
+        android:left="1dp"
+        android:right="1dp"
+        android:top="1dp" />
+    <corners android:radius="21.98dp" />
+</shape>
+
