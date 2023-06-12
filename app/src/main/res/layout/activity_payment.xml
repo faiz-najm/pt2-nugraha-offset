@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.PaymentActivity">
+    tools:context="com.d3if4503.typewriter.activities.PaymentActivity">
 
     <im.delight.android.webview.AdvancedWebView
         android:id="@+id/webview"

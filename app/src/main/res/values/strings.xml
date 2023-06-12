@@ -29,4 +29,13 @@
     <string name="nohp_string">No HP</string>
     <string name="belum_punya_akun">Belum Punya Akun? Daftar</string>
     <string name="sudah_punya_akun">Sudah Punya Akun? Masuk</string>
+    <string name="login_dengan_nomor_telepon">Log in dengan no. handphone</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <!--Splash Screen-->
+    <string name="Logo_text">Nugraha Offset</string>
+    <string name="alamat_perusahaan"><b>Alamat Perusahaan</b>\n\nJln. Raya Dayeuhkolot N0.362, Bandung, Indonesia</string>
+    <string name="desk_perusaan"><b>Sejarah Perusahaan</b>\n\nNugraha Offset adalah Home Industri yang bergerak di bidang percetakan yang Khusus mencetak Yasin,Nota,Undangan,Kop surat,brosur,Dll.\n\nNugraha Offset juga sudah berdiri selama 20 tahun dari tahun 2000 sampai sekarang masih konsisten dengan kualitasnya.Nugraha Offset sudah banyak Bekerja sama dengan Perusahaan yang terkenal diantaranya:Pabrik Kahatex,Toko Buku Al-huda,Bursa Buku Palasari dan Rumah Sakit Ibu dan Anak(Humana Prima).</string>
+    <string name="kontak_perusahaan"><b>Kontak Perusahaan</b>\n\nNomor Telepon: 085220312934\nEmail: nugrahaoffset@gmail.com</string>
+
 </resources>

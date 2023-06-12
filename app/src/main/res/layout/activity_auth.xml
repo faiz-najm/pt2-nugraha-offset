@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".AuthActivity">
+    tools:context="com.d3if4503.typewriter.AuthActivity">
 
-    <include layout="@layout/content_main" />
+    <include layout="@layout/content_auth" />
 
 </FrameLayout>
 

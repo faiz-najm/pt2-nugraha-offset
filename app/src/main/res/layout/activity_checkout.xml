@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/backgroundColor"
     android:orientation="vertical"
-    tools:context=".activities.CheckoutActivity">
+    tools:context="com.d3if4503.typewriter.activities.CheckoutActivity">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -68,7 +68,7 @@
                             android:fontFamily="@font/roboto_bold"
                             android:gravity="right"
                             android:padding="10dp"
-                            android:text="PKR 0.0"
+                            android:text="Rp 0.0"
                             android:textColor="@color/black"
                             android:textSize="16sp"
                             android:textStyle="bold" />
@@ -130,7 +130,7 @@
                             android:fontFamily="@font/roboto_bold"
                             android:gravity="right"
                             android:padding="10dp"
-                            android:text="PKR 0.0"
+                            android:text="Rp 0.0"
                             android:textColor="@color/black"
                             android:textSize="16sp"
                             android:textStyle="bold" />

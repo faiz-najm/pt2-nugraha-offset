@@ -2,26 +2,30 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_main"
-    app:startDestination="@id/loginFragment">
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/nav_mainFragment">
 
     <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.example.aexpress.ui.auth.LoginFragment"
-        android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
+        android:id="@+id/nav_mainFragment"
+        android:name="com.d3if4503.typewriter.activities.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" >
         <action
-            android:id="@+id/action_loginFragment_to_registerFragment"
-            app:destination="@id/registerFragment" />
+            android:id="@+id/action_nav_mainFragment_to_nav_profileFragment"
+            app:destination="@id/nav_profileFragment" />
+        <action
+            android:id="@+id/action_nav_mainFragment_to_nav_aboutUsFragment"
+            app:destination="@id/nav_aboutUsFragment" />
     </fragment>
+
     <fragment
-        android:id="@+id/registerFragment"
-        android:name="com.example.aexpress.ui.auth.RegisterFragment"
-        android:label="fragment_register"
-        tools:layout="@layout/fragment_register" >
-        <action
-            android:id="@+id/action_registerFragment_to_loginFragment"
-            app:destination="@id/loginFragment"
-            app:launchSingleTop="false" />
-    </fragment>
+        android:id="@+id/nav_profileFragment"
+        android:name="com.d3if4503.typewriter.ui.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/nav_aboutUsFragment"
+        android:name="com.d3if4503.typewriter.AboutUsFragment"
+        android:label="About Us"
+        tools:layout="@layout/fragment_about_us"/>
 </navigation>

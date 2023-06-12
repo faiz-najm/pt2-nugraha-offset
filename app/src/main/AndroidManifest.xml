@@ -3,6 +3,7 @@
     package="com.example.aexpress">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:allowBackup="true"
@@ -13,7 +14,7 @@
         android:theme="@style/Theme.AExpress"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".AuthActivity"
+            android:name="com.d3if4503.typewriter.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,36 +23,43 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.SearchActivity"
+            android:name="com.d3if4503.typewriter.MainActivity"
+            android:exported="false"/>
+        <activity
+            android:name="com.d3if4503.typewriter.AuthActivity"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name="com.d3if4503.typewriter.VerifyPhoneActivity"
             android:exported="false"
             android:theme="@style/Theme.AExpress.Actionbar" />
         <activity
-            android:name=".activities.CategoryActivity"
+            android:name="com.d3if4503.typewriter.activities.SearchActivity"
             android:exported="false"
             android:theme="@style/Theme.AExpress.Actionbar" />
         <activity
-            android:name=".activities.PaymentActivity"
+            android:name="com.d3if4503.typewriter.activities.CategoryActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AExpress.Actionbar" />
+        <activity
+            android:name="com.d3if4503.typewriter.activities.PaymentActivity"
             android:exported="false"
             android:label="Payment"
             android:theme="@style/Theme.AExpress.Actionbar" />
         <activity
-            android:name=".activities.CheckoutActivity"
+            android:name="com.d3if4503.typewriter.activities.CheckoutActivity"
             android:exported="false"
             android:label="Checkout"
             android:theme="@style/Theme.AExpress.Actionbar" />
         <activity
-            android:name=".activities.CartActivity"
+            android:name="com.d3if4503.typewriter.activities.CartActivity"
             android:exported="false"
             android:label="Shopping Cart"
             android:theme="@style/Theme.AExpress.Actionbar" />
         <activity
-            android:name=".activities.ProductDetailActivity"
+            android:name="com.d3if4503.typewriter.activities.ProductDetailActivity"
             android:exported="false"
             android:theme="@style/Theme.AExpress.Actionbar" />
-        <activity
-            android:name=".activities.MainActivity"
-            android:exported="false" />
-
 
         <meta-data
             android:name="preloaded_fonts"

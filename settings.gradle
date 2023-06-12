@@ -13,5 +13,5 @@ dependencyResolutionManagement {
         maven { url "https://jitpack.io" }
     }
 }
-rootProject.name = "aExpress"
+rootProject.name = "Nugraha Offset"
 include ':app'

@@ -1,0 +1,4 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#FFFFFF" /> <!-- Warna putih -->
+    <corners android:radius="100dp" /> <!-- Set jari-jari sudut lebih besar dari setengah tinggi CardView -->
+</shape>

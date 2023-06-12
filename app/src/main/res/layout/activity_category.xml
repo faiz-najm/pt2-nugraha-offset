@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.CategoryActivity">
+    tools:context="com.d3if4503.typewriter.activities.CategoryActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/productList"
