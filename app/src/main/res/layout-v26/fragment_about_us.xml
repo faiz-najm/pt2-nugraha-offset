@@ -32,9 +32,11 @@
             android:justificationMode="inter_word"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:padding="16dp"
             android:text="@string/desk_perusaan"
-            android:lineSpacingMultiplier="1"/>
+            android:lineSpacingExtra="4dp"
+            android:lineSpacingMultiplier="1.2"/>
 
         <TextView
             android:id="@+id/company_address"

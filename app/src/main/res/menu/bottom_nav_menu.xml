@@ -8,8 +8,8 @@
 
     <item
         android:id="@+id/nav_aboutUsFragment"
-        android:icon="@drawable/baseline_message_24"
-        android:title="Tentang Aplikasi" />
+        android:icon="@drawable/baseline_info_24"
+        android:title="Tentang Kami" />
     <item
         android:id="@+id/nav_profileFragment"
         android:icon="@drawable/baseline_person_24"

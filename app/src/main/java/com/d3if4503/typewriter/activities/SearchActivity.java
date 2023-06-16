@@ -3,12 +3,14 @@ package com.d3if4503.typewriter.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.d3if4503.typewriter.MainActivity;
 import com.d3if4503.typewriter.adapters.ProductAdapter;
 import com.d3if4503.typewriter.model.Product;
 import com.d3if4503.typewriter.utils.Constants;
@@ -22,10 +24,10 @@ import java.util.ArrayList;
 
 public class SearchActivity extends AppCompatActivity {
 
-
     ActivitySearchBinding binding;
     ProductAdapter productAdapter;
     ArrayList<Product> products;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,8 +52,11 @@ public class SearchActivity extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
         finish();
-        return super.onSupportNavigateUp();
+        return true;
     }
 
     void getProducts(String query) {
@@ -61,9 +66,9 @@ public class SearchActivity extends AppCompatActivity {
         StringRequest request = new StringRequest(Request.Method.GET, url, response -> {
             try {
                 JSONObject object = new JSONObject(response);
-                if(object.getString("status").equals("success")){
+                if (object.getString("status").equals("success")) {
                     JSONArray productsArray = object.getJSONArray("products");
-                    for(int i =0; i< productsArray.length(); i++) {
+                    for (int i = 0; i < productsArray.length(); i++) {
                         JSONObject childObj = productsArray.getJSONObject(i);
                         Product product = new Product(
                                 childObj.getString("name"),
@@ -73,7 +78,6 @@ public class SearchActivity extends AppCompatActivity {
                                 childObj.getDouble("price_discount"),
                                 childObj.getInt("stock"),
                                 childObj.getInt("id")
-
                         );
                         products.add(product);
                     }
@@ -82,7 +86,8 @@ public class SearchActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-        }, error -> { });
+        }, error -> {
+        });
 
         queue.add(request);
     }

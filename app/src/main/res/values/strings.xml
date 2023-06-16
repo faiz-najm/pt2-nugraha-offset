@@ -18,7 +18,8 @@
     <string name="date_shipping_hint">Tanggal Pengiriman</string>
     <string name="cost_details">Rincian Pembayaran</string>
     <string name="PPN_text">PPN</string>
-    <string name="password">Konfirmasi Password</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Konfirmasi Password</string>
     <string name="welcome">WELCOME</string>
     <string name="login">Login</string>
     <string name="email_string">Email</string>
@@ -34,8 +35,10 @@
 
     <!--Splash Screen-->
     <string name="Logo_text">Nugraha Offset</string>
-    <string name="alamat_perusahaan"><b>Alamat Perusahaan</b>\n\nJln. Raya Dayeuhkolot N0.362, Bandung, Indonesia</string>
-    <string name="desk_perusaan"><b>Sejarah Perusahaan</b>\n\nNugraha Offset adalah Home Industri yang bergerak di bidang percetakan yang Khusus mencetak Yasin,Nota,Undangan,Kop surat,brosur,Dll.\n\nNugraha Offset juga sudah berdiri selama 20 tahun dari tahun 2000 sampai sekarang masih konsisten dengan kualitasnya.Nugraha Offset sudah banyak Bekerja sama dengan Perusahaan yang terkenal diantaranya:Pabrik Kahatex,Toko Buku Al-huda,Bursa Buku Palasari dan Rumah Sakit Ibu dan Anak(Humana Prima).</string>
+    <string name="alamat_perusahaan"><b>Alamat Perusahaan</b>\n\nJln. Raya Dayeuhkolot N0.362, Kab. Bandung, Indonesia</string>
+    <string name="desk_perusaan"><b>Sejarah Perusahaan</b>\n\nNugraha Offset adalah Home Industri yang bergerak di bidang percetakan yang khusus mencetak yasin, nota, undangan, kop surat, brosur, dll.\n\nNugraha Offset juga sudah berdiri selama 20 tahun dari tahun 2000 sampai sekarang masih konsisten dengan kualitasnya. Nugraha Offset sudah banyak Bekerja sama dengan perusahaan yang terkenal diantaranya: Pabrik Kahatex, Toko Buku Al-Huda, Bursa Buku Palasari dan Rumah Sakit Ibu dan Anak (Humana Prima).</string>
     <string name="kontak_perusahaan"><b>Kontak Perusahaan</b>\n\nNomor Telepon: 085220312934\nEmail: nugrahaoffset@gmail.com</string>
+    <string name="otp_info">Kode OTP dikirim melalui <b>SMS</b> ke</string>
+    <string name="otp_info_number"><b>+64 888-8888-8888</b></string>
 
 </resources>

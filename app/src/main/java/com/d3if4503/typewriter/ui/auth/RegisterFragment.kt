@@ -144,10 +144,8 @@ class RegisterFragment : Fragment(), View.OnClickListener, View.OnFocusChangeLis
                             formattedNumber = formattedNumber.replaceFirst("0", "+62 ")
                         } else if (!formattedNumber.startsWith("+62")) {
                             formattedNumber = "+62 $formattedNumber"
-                        } else if (formattedNumber.startsWith("+62")) {
-                            formattedNumber = formattedNumber.replaceFirst("+62", "+62 ")
                         } else if (formattedNumber.startsWith("62")) {
-                            formattedNumber = formattedNumber.replaceFirst("62", "+62 ")
+                            formattedNumber = formattedNumber.replaceFirst("62", "+62")
                         }
                         binding.nohpInp.setText(formattedNumber)
                         binding.nohpInp.setSelection(binding.nohpInp.text.toString().length)

@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "679660445608",
-    "firebase_url": "https://nugraha-offset-a9e6c-default-rtdb.asia-southeast1.firebasedatabase.app",
-    "project_id": "nugraha-offset-a9e6c",
-    "storage_bucket": "nugraha-offset-a9e6c.appspot.com"
+    "project_number": "815653759714",
+    "firebase_url": "https://nugraha-offset-17e65-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "nugraha-offset-17e65",
+    "storage_bucket": "nugraha-offset-17e65.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:679660445608:android:7ab0c56aaa763bf8bd079d",
+        "mobilesdk_app_id": "1:815653759714:android:94ba4d80540beb5f26ccbb",
         "android_client_info": {
           "package_name": "com.d3if4503.typewriter"
         }
       },
       "oauth_client": [
         {
-          "client_id": "679660445608-vil0j5vd7o55kje2ibsi2mv7m9o7n324.apps.googleusercontent.com",
+          "client_id": "815653759714-k75cv8oqth6e01n201ubrgnm19dcp1hm.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDabFXgm7TgL8RkBp_UERP2J_iScwbOgu4"
+          "current_key": "AIzaSyB2dP-NefJflJDUEw-Z29wEiCNL3TZiNc8"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "679660445608-vil0j5vd7o55kje2ibsi2mv7m9o7n324.apps.googleusercontent.com",
+              "client_id": "815653759714-k75cv8oqth6e01n201ubrgnm19dcp1hm.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

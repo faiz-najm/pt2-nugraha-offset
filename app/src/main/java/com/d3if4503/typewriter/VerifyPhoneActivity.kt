@@ -1,17 +1,22 @@
 package com.d3if4503.typewriter
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.TextPaint
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
+import android.text.style.ForegroundColorSpan
 import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import com.d3if4503.typewriter.activities.MainFragment
 import com.d3if4503.typewriter.model.User
 import com.example.aexpress.R
@@ -31,12 +36,10 @@ import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
 import com.google.firebase.auth.PhoneAuthProvider.ForceResendingToken
 import com.google.firebase.auth.PhoneAuthProvider.OnVerificationStateChangedCallbacks
-import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.launch
 import org.d3if3155.MoMi.data.SettingDataStore
 import org.d3if3155.MoMi.data.dataStore
 import java.util.concurrent.TimeUnit
@@ -76,7 +79,6 @@ class VerifyPhoneActivity : AppCompatActivity(), View.OnKeyListener, View.OnFocu
         database = Firebase.database.reference
 
         binding.verifyPhoneBTn.visibility = View.GONE
-        binding.resendOTP.visibility = View.GONE
 
         binding.otpNumberOne.setOnKeyListener(this)
         binding.optNumberTwo.setOnKeyListener(this)
@@ -92,6 +94,16 @@ class VerifyPhoneActivity : AppCompatActivity(), View.OnKeyListener, View.OnFocu
         binding.otpNumberFive.onFocusChangeListener = this
         binding.otpNumberSix.onFocusChangeListener = this
 
+        val timer = object : CountDownTimer(60000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                binding.textViewCountdown.text =
+                    "Mohon tunggu ${millisUntilFinished / 1000} detik untuk mengirim ulang"
+            }
+
+            override fun onFinish() {
+            }
+        }
+
         callbacks = object : OnVerificationStateChangedCallbacks() {
 
             override fun onCodeSent(
@@ -103,21 +115,44 @@ class VerifyPhoneActivity : AppCompatActivity(), View.OnKeyListener, View.OnFocu
                 storedVerificationId = verificationId
                 resendToken = token
 
-                updateUI(auth.currentUser)
+                val spannableString = SpannableString(phone)
+
+                spannableString.setSpan(
+                    ForegroundColorSpan(Color.BLACK),
+                    0,
+                    phone.length,
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
+
+                // bold phone number
+                binding.textInfoNumber.text = spannableString
+
+                binding.verifyPhoneBTn.visibility = View.VISIBLE
+                binding.otpNumberOne.requestFocus()
+
                 Log.d(TAG, "onCodeSent:$verificationId")
+                timer.start()
             }
 
             override fun onCodeAutoRetrievalTimeOut(s: String) {
                 super.onCodeAutoRetrievalTimeOut(s)
                 // called when the timeout duration has passed without triggering onVerificationCompleted
-                binding.resendOTP.visibility = View.VISIBLE
                 Log.d(TAG, "onCodeAutoRetrievalTimeOut:$s")
+
+                val spannableString = SpannableString("Tidak menerima kode? Kirim Ulang")
+
+                setClickableSpan(spannableString, "Kirim Ulang", Color.BLUE) {
+                    // Code for the action when "Kirim ulang" is clicked
+                    resendVerificationCode(phone, resendToken)
+                }
+
+                timer.cancel()
+                binding.textViewCountdown.text = spannableString
+                binding.textViewCountdown.movementMethod = LinkMovementMethod.getInstance()
             }
 
             override fun onVerificationCompleted(phoneAuthCredential: PhoneAuthCredential) {
                 // called when the device has SMS auto-retrieval capability, or the phone number can be instantly verified without needing a code
-                binding.resendOTP.visibility = View.GONE
-
                 Log.d(TAG, "onVerificationCompleted:Success")
             }
 
@@ -134,12 +169,18 @@ class VerifyPhoneActivity : AppCompatActivity(), View.OnKeyListener, View.OnFocu
 
                     is FirebaseTooManyRequestsException -> {
                         // The SMS quota for the project has been exceeded
+                        Log.d(TAG, "SMS Quota exceeded.")
+
                     }
 
                     is FirebaseAuthMissingActivityForRecaptchaException -> {
                         // reCAPTCHA verification attempted with null Activity
+                        Log.d(TAG, "Missing ReCaptcha Activity")
                     }
                 }
+
+                // Go back to the previous activity
+                startActivity(Intent(this@VerifyPhoneActivity, AuthActivity::class.java))
             }
         }
 
@@ -164,10 +205,6 @@ class VerifyPhoneActivity : AppCompatActivity(), View.OnKeyListener, View.OnFocu
                     binding.otpNumberOne.text.toString() + binding.optNumberTwo.text.toString() + binding.otpNumberThree.text.toString() + binding.otpNumberFour.text.toString() + binding.otpNumberFive.text.toString() + binding.otpNumberSix.text.toString()
                 verifyPhoneNumberWithCode(storedVerificationId!!, otp)
             }
-        }
-
-        binding.resendOTP.setOnClickListener {
-            resendVerificationCode(phone, resendToken)
         }
 
         startPhoneNumberVerification(phone)
@@ -247,13 +284,13 @@ class VerifyPhoneActivity : AppCompatActivity(), View.OnKeyListener, View.OnFocu
 
                     }
 
+
                     is FirebaseAuthInvalidUserException -> {
                         Toast.makeText(
                             this@VerifyPhoneActivity,
                             "Invalid User",
                             Toast.LENGTH_SHORT
                         ).show()
-
                     }
 
                     else -> {
@@ -274,11 +311,13 @@ class VerifyPhoneActivity : AppCompatActivity(), View.OnKeyListener, View.OnFocu
 
                 writeNewUser(
                     auth.currentUser?.uid.toString(),
+                    "",
+                    "online"
                 )
 
                 auth.currentUser?.updateProfile(
                     com.google.firebase.auth.ktx.userProfileChangeRequest {
-                        this.displayName = displayName
+                        this.displayName = nama
                     }
                 )
 
@@ -332,39 +371,33 @@ class VerifyPhoneActivity : AppCompatActivity(), View.OnKeyListener, View.OnFocu
 
     private fun updateUI(user: FirebaseUser? = auth.currentUser) {
         // count down timer for resend otp
-        val timer = object : CountDownTimer(60000, 1000) {
-            override fun onTick(millisUntilFinished: Long) {
-                binding.textViewCountdown.text =
-                    "Mohon tunggu ${millisUntilFinished / 1000} detik untuk mengirim ulang"
-            }
 
-            override fun onFinish() {
-                binding.textViewCountdown.visibility = View.GONE
-                binding.resendOTP.visibility = View.VISIBLE
-            }
-        }
-
-        binding.textViewCountdown.visibility = View.VISIBLE
-        binding.verifyPhoneBTn.visibility = View.VISIBLE
-        binding.resendOTP.visibility = View.GONE
-
-        binding.otpNumberOne.requestFocus()
-        timer.start()
     }
 
     override fun onKey(view: View?, keyCode: Int, event: KeyEvent?): Boolean {
 
+        // if user input not click backspace then move to next edit text
         if (view != null && view is EditText) {
-            if (view.text.toString().length == 1) {
-                if (KeyEvent.KEYCODE_DEL == event?.action) {
-                    when (view.id) {
-                        R.id.otpNumberOne -> binding.optNumberTwo.requestFocus()
-                        R.id.optNumberTwo -> binding.otpNumberThree.requestFocus()
-                        R.id.otpNumberThree -> binding.otpNumberFour.requestFocus()
-                        R.id.otpNumberFour -> binding.otpNumberFive.requestFocus()
-                        R.id.otpNumberFive -> binding.otpNumberSix.requestFocus()
-                        R.id.otpNumberSix -> binding.verifyPhoneBTn.performClick()
-                    }
+
+            if (keyCode != KeyEvent.KEYCODE_DEL && view.text.isNotEmpty()) {
+                when (view) {
+                    binding.otpNumberOne -> binding.optNumberTwo.requestFocus()
+                    binding.optNumberTwo -> binding.otpNumberThree.requestFocus()
+                    binding.otpNumberThree -> binding.otpNumberFour.requestFocus()
+                    binding.otpNumberFour -> binding.otpNumberFive.requestFocus()
+                    binding.otpNumberFive -> binding.otpNumberSix.requestFocus()
+                    binding.otpNumberSix -> binding.otpNumberSix.requestFocus()
+                }
+            }
+
+            // if user input click backspace then move to previous edit text
+            if (keyCode == KeyEvent.KEYCODE_DEL && view.text.isEmpty()) {
+                when (view) {
+                    binding.optNumberTwo -> binding.otpNumberOne.requestFocus()
+                    binding.otpNumberThree -> binding.optNumberTwo.requestFocus()
+                    binding.otpNumberFour -> binding.otpNumberThree.requestFocus()
+                    binding.otpNumberFive -> binding.otpNumberFour.requestFocus()
+                    binding.otpNumberSix -> binding.otpNumberFive.requestFocus()
                 }
             }
         }
@@ -372,34 +405,60 @@ class VerifyPhoneActivity : AppCompatActivity(), View.OnKeyListener, View.OnFocu
     }
 
     override fun onFocusChange(view: View?, hasFocus: Boolean) {
-        /* if (view != null && view is EditText) {
-
-             if (binding.otpNumberOne.text.isEmpty()) {
-                 binding.otpNumberOne.requestFocus()
-             } else if (binding.optNumberTwo.text.isEmpty()) {
-                 binding.optNumberTwo.requestFocus()
-             } else if (binding.otpNumberThree.text.isEmpty()) {
-                 binding.otpNumberThree.requestFocus()
-             } else if (binding.otpNumberFour.text.isEmpty()) {
-                 binding.otpNumberFour.requestFocus()
-             } else if (binding.otpNumberFive.text.isEmpty()) {
-                 binding.otpNumberFive.requestFocus()
-             } else if (binding.otpNumberSix.text.isEmpty()) {
-                 binding.otpNumberSix.requestFocus()
-             }
-         }*/
+        /*if (view != null && view is EditText) {
+            if (binding.otpNumberOne.text.isEmpty()) {
+                binding.otpNumberOne.requestFocus()
+            } else if (binding.optNumberTwo.text.isEmpty()) {
+                binding.optNumberTwo.requestFocus()
+            } else if (binding.otpNumberThree.text.isEmpty()) {
+                binding.otpNumberThree.requestFocus()
+            } else if (binding.otpNumberFour.text.isEmpty()) {
+                binding.otpNumberFour.requestFocus()
+            } else if (binding.otpNumberFive.text.isEmpty()) {
+                binding.otpNumberFive.requestFocus()
+            } else if (binding.otpNumberSix.text.isEmpty()) {
+                binding.otpNumberSix.requestFocus()
+            }
+        }*/
     }
 
     private fun writeNewUser(
         userId: String,
         alamat: String? = "",
+        status: String?,
     ) {
-        val user = User(alamat!!)
+        val user = User(alamat!!, status!!)
         database.child("users").child(userId).setValue(user).addOnSuccessListener {
             Log.d("TAG", "writeNewUser: Success")
         }.addOnFailureListener {
             Log.d("TAG", "writeNewUser: ${it.message}")
         }
+    }
+
+    private fun setClickableSpan(
+        spannableString: SpannableString,
+        clickableText: String,
+        color: Int,
+        onClick: () -> Unit
+    ) {
+        val clickableSpan: ClickableSpan = object : ClickableSpan() {
+            override fun onClick(widget: View) {
+                onClick.invoke()
+            }
+
+            override fun updateDrawState(ds: TextPaint) {
+                super.updateDrawState(ds)
+                ds.color = color
+                ds.isUnderlineText = false
+            }
+        }
+        val startIndexOfClickableText = spannableString.indexOf(clickableText)
+        spannableString.setSpan(
+            clickableSpan,
+            startIndexOfClickableText,
+            startIndexOfClickableText + clickableText.length,
+            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
     }
 
     companion object {
